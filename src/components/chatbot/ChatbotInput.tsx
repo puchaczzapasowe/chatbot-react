@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
 import { useAppDispatch } from '../../../store/store';
-import { Message, MessageType, addMessage } from '../../../store/chatbot';
+import { Message, MessageType, addMessage } from '../../../store/chatbotSlice';
 
 type ChatbotResponse = {
   message: string;

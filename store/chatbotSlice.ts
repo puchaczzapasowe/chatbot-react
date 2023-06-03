@@ -11,9 +11,11 @@ export type Message = {
 
 export interface CounterState {
   messages: Message[];
+  chatIsOpen: boolean;
 }
 const initialState: CounterState = {
   messages: [],
+  chatIsOpen: false,
 };
 export const counterSlice = createSlice({
   name: 'chatbot',
@@ -22,8 +24,11 @@ export const counterSlice = createSlice({
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages = [...state.messages, action.payload];
     },
+    setChatIsOpen: (state, action: PayloadAction<boolean>) => {
+      state.chatIsOpen = action.payload;
+    },
   },
 });
 
 export default counterSlice.reducer;
-export const { addMessage } = counterSlice.actions;
+export const { addMessage, setChatIsOpen } = counterSlice.actions;

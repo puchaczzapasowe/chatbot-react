@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatbot from './chatbot';
-import { TypedUseSelectorHook,useSelector,useDispatch } from 'react-redux';
+import chatbot from './chatbotSlice';
+import headerSlice from './headerSlice';
+
+import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 export const store = configureStore({
-  reducer: { chatbot: chatbot },
+  reducer: { chatbot: chatbot, header: headerSlice },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
