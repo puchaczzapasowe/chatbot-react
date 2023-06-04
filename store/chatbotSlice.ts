@@ -24,6 +24,7 @@ export const counterSlice = createSlice({
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages = [...state.messages, action.payload];
     },
+    
     setChatIsOpen: (state, action: PayloadAction<boolean>) => {
       state.chatIsOpen = action.payload;
     },
