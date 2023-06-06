@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
 import { useAppDispatch } from '../../../store/store';
 import { Message, MessageType, addMessage } from '../../../store/chatbotSlice';
@@ -23,6 +23,16 @@ const sendMessageToBot = async (message: string) => {
 
 export const ChatBotInput = () => {
   const [newMessage, setNewMassege] = useState('');
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewMassege(e.target.value);
+    console.log(e.target.value);
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
   const dispatch = useAppDispatch();
 
   const handleSendMessage = () => {
@@ -55,12 +65,14 @@ export const ChatBotInput = () => {
   });
 
   return (
-    <div className='w-full flex flex-nowrap border-2 border-black text-[1.4em]'>
+    <div className='w-full flex flex-nowrap border-t-2 border-black text-[1.4em] '>
       <input
         type='text'
-        className='flex-grow'
+        border-none
+        className='flex-grow focus:border-none  '
         value={newMessage}
-        onChange={(e) => setNewMassege(e.currentTarget.value)}
+        onKeyDown={handleKeyDown}
+        onChange={handleInputChange}
       />
       <button
         onClick={handleSendMessage}

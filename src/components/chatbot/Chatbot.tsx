@@ -5,23 +5,31 @@ import { ChatbotMessageArea } from './ChatbotMessageArea';
 import { useAppSelector } from '../../../store/store';
 import { useDispatch } from 'react-redux';
 import { setChatIsOpen } from '../../../store/chatbotSlice';
+import { motion } from 'framer-motion';
 
 export const Chatbot = () => {
   const dispatch = useDispatch();
   const { chatIsOpen } = useAppSelector((state) => state.chatbot);
+
   if (!chatIsOpen)
     return (
       <button
-        className='bg-green-500 p-3 border-4 border-black rounded-full fixed right-4 bottom-2 text-4xl'
+        className='bg-green-500 p-3 border-2 border-black rounded-full fixed right-4 bottom-2 text-4xl'
         onClick={() => dispatch(setChatIsOpen(true))}>
         <BiBot />
       </button>
     );
   return (
-    <div className='fixed  w-screen h-screen lg:w-[300px] lg:h-[400px] lg:bottom-3 lg:right-3 flex flex-col  bg-white border-4 border-black font-2xl'>
-      <ChatbotHeader close={() => dispatch(setChatIsOpen(true))} />
+    <motion.div
+      className='fixed  lg:w-[300px] lg:h-[400px] lg:bottom-5 lg:right-5 flex flex-col  bg-white border-4 border-black font-2xl'
+      // animate={{ width:'auto',height:'auto' }}
+      // initial={{width:0,height:0}}
+      transition={{duration:.3}}
+      >
+      <ChatbotHeader close={() => dispatch(setChatIsOpen(false))} />
       <ChatbotMessageArea />
       <ChatBotInput />
-    </div>
+    </motion.div>
   );
 };
+

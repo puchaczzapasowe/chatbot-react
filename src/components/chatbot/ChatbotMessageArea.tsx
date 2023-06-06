@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes } from 'react';
+import { HtmlHTMLAttributes, useEffect, useRef } from 'react';
 import { useAppSelector } from '../../../store/store';
 import { Message } from '../../../store/chatbotSlice';
 
@@ -8,8 +8,6 @@ const messageStyles = new Map<string, CssStyles>([['info', 'bg-green-600']]);
 
 const ChatbotMassage = ({ message }: { message: Message }) => {
   const { author, text, type } = message;
-  console.log(author, author === 'bot');
-
   const messageStyle: CssStyles = `${messageStyles.get(type)} ${
     author === 'user' ? ' ' : ' ml-[40%]'
   }`;
@@ -17,7 +15,7 @@ const ChatbotMassage = ({ message }: { message: Message }) => {
   return (
     <span
       className={
-        `w-max-3/5 w-fit w-min-1/3 p-2 rounded-md border-2 border-black  ` +
+        `w-max-3/5 w-fit w-min-1/3 p-2 rounded-md border-2 border-black overflow-x-scroll:hidden  ` +
         messageStyle
       }>
       {text}
@@ -26,9 +24,18 @@ const ChatbotMassage = ({ message }: { message: Message }) => {
 };
 export const ChatbotMessageArea = () => {
   const { messages } = useAppSelector((state) => state.chatbot);
+  const divAreaRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    divAreaRef.current?.scrollTo({
+      top: divAreaRef.current.clientHeight,
+      behavior: 'smooth',
+    });
+  }, [messages]);
   return (
-    <div className=' flex flex-col flex-grow border-2 border-y-red-800 p-1 gap-2 font-semibold'>
+    <div
+      className=' flex flex-col flex-grow p-1 gap-2 font-semibold overflow-scroll'
+      ref={divAreaRef}>
       {messages.map((message, index) => (
         <ChatbotMassage message={message} key={index} />
       ))}
