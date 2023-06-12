@@ -8,6 +8,7 @@ import { store } from '../store/store';
 import { Nav } from './components/Nav';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import ProductsPage from './pages/Products';
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -17,6 +18,8 @@ function App() {
           <Nav />
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/products' element={<ProductsPage />} />
+            
           </Routes>
           <Chatbot />
           <Footer />
