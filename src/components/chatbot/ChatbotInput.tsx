@@ -4,10 +4,12 @@ import React, { ChangeEvent, useState } from 'react';
 import { BsSendFill } from 'react-icons/bs';
 import { useAppDispatch } from '../../../store/store';
 import { Message, MessageType, addMessage } from '../../../store/chatbotSlice';
+import { Product } from '../../../types/database';
 
 type ChatbotResponse = {
   message: string;
   tag: string;
+  product: Product | null;
 };
 
 const sendMessageToBot = async (message: string) => {
@@ -16,7 +18,6 @@ const sendMessageToBot = async (message: string) => {
     JSON.stringify({ message }),
     { headers: { 'Content-Type': 'application/json  ' } }
   );
-  console.log(res);
 
   return res.data as ChatbotResponse;
 };
@@ -50,6 +51,7 @@ export const ChatBotInput = () => {
         text: data.message,
         type: 'info' as MessageType,
         author: 'bot' as const,
+        product: data.product as Product,
       };
       dispatch(addMessage(newMessage));
     },

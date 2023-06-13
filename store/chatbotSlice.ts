@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { Product } from '../types/database';
 const MassageTypes = ['info', 'link', 'wrong', 'user'] as const;
 export type MessageType = (typeof MassageTypes)[number];
 
@@ -7,6 +8,7 @@ export type Message = {
   type: MessageType;
   text: string;
   author: 'user' | 'bot';
+  product?:Product
 };
 
 export interface CounterState {

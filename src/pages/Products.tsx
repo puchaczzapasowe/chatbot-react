@@ -1,10 +1,18 @@
-import { ProviderProps } from 'react-redux';
-
 const ProductsPage = () => {
   return (
-    <main>
+    <main className='max-w-[1200px] m-auto flex'>
       <header>Click and Explore: A World of Computer Mouse Marvels</header>
-      <div></div>
+      <div>
+        <h3>Select Your Mouse</h3>
+      <div className="border-2 border-black ">
+
+
+
+      </div>
+        
+
+
+      </div>
     </main>
   );
 };

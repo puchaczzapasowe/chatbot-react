@@ -1,6 +1,7 @@
 import { HtmlHTMLAttributes, useEffect, useRef } from 'react';
 import { useAppSelector } from '../../../store/store';
 import { Message } from '../../../store/chatbotSlice';
+import ProductListElement from '../ProcuctListElement';
 
 type CssStyles = HtmlHTMLAttributes<HTMLElement>['className'];
 
@@ -36,9 +37,18 @@ export const ChatbotMessageArea = () => {
     <div
       className=' flex flex-col flex-grow p-1 gap-2 font-semibold overflow-scroll'
       ref={divAreaRef}>
-      {messages.map((message, index) => (
-        <ChatbotMassage message={message} key={index} />
-      ))}
+      {messages.map((message, index) => {
+        console.log(message);
+
+        return message.product ? (
+          <>
+            <ProductListElement product={message.product} />
+            <ChatbotMassage message={message} key={index} />
+          </>
+        ) : (
+          <ChatbotMassage message={message} key={index} />
+        );
+      })}
     </div>
   );
 };
